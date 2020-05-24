@@ -1,5 +1,6 @@
 export default {
   mode: 'spa',
+  dev: process.env.NODE_ENV !== 'production',
   /*
    ** Headers of the page
    */
@@ -55,6 +56,19 @@ export default {
    ** Build configuration
    */
   build: {
+    // https://github.com/storybookjs/storybook/issues/6204#issuecomment-572491973
+    babel: {
+      presets() {
+        return [
+          [
+            '@nuxt/babel-preset-app',
+            {
+              corejs: { version: 3 }
+            }
+          ]
+        ]
+      }
+    },
     /*
      ** You can extend webpack config here
      */
